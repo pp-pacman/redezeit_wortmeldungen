@@ -252,13 +252,10 @@
 			
 			c.find('.timerbox').stopwatch().click(function(){ 
 
-				var result = $(this).stopwatch('toggle2');
+				var result = $(this).stopwatch('status');
                 console.log('active:' + JSON.stringify(result));
 								
 				if ( !result ) {
-					$('#sortable .userbox').each( function () {
-						$(this).find('.timerbox').stopwatch().stopwatch('stop');
-					});
 					callevent({	command: 'toptimerstop', time:'0' });
 
 				} else {
@@ -269,41 +266,39 @@
             });
 
 			c.find('#startstop').click(function(){ 
-
 				var c = $(this).parent();
 				var timerbox = c.find('.timerbox');
 				var result = timerbox.stopwatch('toggle2');
 				
+                console.log('active:' + JSON.stringify(result));
+								
 				if ( !result ) {
-					$('#sortable .userbox').each( function () {
-						$(this).find('.timerbox').stopwatch().stopwatch('stop');
-					});
-				} 
+					callevent({	command: 'toptimerstop', time:'0' });
+
+				} else {
+					callevent({	command: 'toptimerstart', time:'0' });
+				
+				}
 
             });
 
-			c.find('.remove').click(function(){
-				var c = $(this).parent().parent();
-				var timerbox = c.find('.timerbox');
-				timerbox.stopwatch().stopwatch('destroy');
-				c.remove();
-			});
-
 			c.find('#reset').click(function(){
+/*
 				var c = $(this).parent();
 				var timerbox = c.find('.timerbox');
 				timerbox.stopwatch('reset');
 				timerbox.stopwatch('stop');
 				timerbox.text('00:00:00');
+*/
+				callevent({	command: 'toptimerreset', time: '0' });
 
-				callevent({	command: 'topreset', time: '0' });
-
+/*
 				$('#sortable .userbox').each( function () {
 					$(this).find('.timerbox').stopwatch('reset');
 					$(this).find('.timerbox').text('00:00:00');
 					
 				});
-
+*/
 /*				sleep(500);
 				$('#sortable .userbox').each( function () {
 					$(this).find('.timerbox').stopwatch('stop');
@@ -385,7 +380,6 @@
 	
 
 		function userboxtimer($element, $onoff = false, $local = false) {
-
 			var timerbox = $element.find('.timerbox');
 			var result;
 			if ($onoff){
@@ -636,7 +630,26 @@
 
 						});
 						
-					}
+					} else if (data['command'] == 'toptimerstart') {
+						$('#index0').find('.timerbox').stopwatch().stopwatch('start');
+						
+					} else if (data['command'] == 'toptimerstop') {
+						$('#index0').find('.timerbox').stopwatch().stopwatch('stop');
+
+						$('#sortable .userbox').each( function () {
+							$(this).find('.timerbox').stopwatch().stopwatch('stop');
+						});
+
+					} else if (data['command'] == 'toptimerreset') {
+						$('#index0').find('.timerbox').stopwatch().stopwatch('stop');
+						$('#index0').find('.timerbox').stopwatch().stopwatch('setTime',0); 
+						$('#sortable .userbox').each( function () {
+							$(this).find('.timerbox').stopwatch().stopwatch('stop');
+							$(this).find('.timerbox').stopwatch().stopwatch('setTime',0); 
+						});
+						
+					}	
+
 					
 				},false);
 			

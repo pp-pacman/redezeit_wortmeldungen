@@ -160,7 +160,7 @@ if(isset($_POST['user']) && !isset($_POST['message'])){
 		}
 	
 		$data->set('command',json_encode(array('session'=>htmlentities($_POST['session']),'time'=>time(), 'command'=>$_POST['command'], 'username'=>$_POST['username'])));
-		
+
 	} else if ($_POST['command'] == 'timerstart') {
 		
 		try{
@@ -289,7 +289,117 @@ if(isset($_POST['user']) && !isset($_POST['message'])){
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}
+		$data->set('command',json_encode(array('session'=>htmlentities($_POST['session']),'time'=>time(), 'command'=>$_POST['command'], 'username'=>$_POST['username'])));
+		
+	} else if ($_POST['command'] == 'toptimerstart') {
+		$data->set('command',json_encode(array('session'=>htmlentities($_POST['session']),'time'=>time(), 'command'=>$_POST['command'], 'username'=>$_POST['username'])));
+		
+	} else if ($_POST['command'] == 'toptimerstop') {
+	
+		try{
+			$sql ="";
+			$sql .="SELECT * ";
+			$sql .="FROM `" . $database_table_prefix . "user_active`";
+			$sql .=" WHERE `session` = :session";
+			$sql .=" AND `name` = :name ";
+			$sql .=" AND `status` = :status ";
+			$sql .=" LIMIT 1";
+			$sql .=";";
+	
+			if ($debug >= 1) {
+				echo $sql;
+				$stmt = $dbh->prepare($sql);
+				$status = "start";
+			}
 
+			$status="start";
+			$stmt->bindParam(":session", $_POST['session']);
+			$stmt->bindParam(":name", $_POST['username']);
+			$stmt->bindParam(":status", $status);
+			$stmt->execute();
+
+			while($row = $stmt->fetch()) {
+				$id = $row['id'];
+				$time = $row['time'];
+				$update = $row['update'];
+				
+			}
+
+			if ($debug >= 1) {
+				echo $stmt->queryString;
+				echo "<br />\n";
+				echo $stmt->errorCode();
+				echo "\nPDO::errorInfo():\n";
+				print_r($stmt->errorInfo());
+			}
+			$isauth = true;
+		
+			$sql ="";
+			$sql .="INSERT INTO `" . $database_table_prefix . "user_active` SET";
+			$sql .=" `session` = :session";
+			$sql .=", `name` = :name ";
+			$sql .=" ON DUPLICATE KEY UPDATE ";
+			$sql .=" `status` = 'stop' ";
+			$sql .=", `time` = `time` + time_to_sec( timediff( now( ) , from_unixtime( `update` ) ) ) ";
+			$sql .=", `update` = UNIX_TIMESTAMP() ";
+			$sql .=";";
+	
+
+	
+	
+			echo $sql;
+			$stmt = $dbh->prepare($sql);
+			$tmp_status = "stop";
+			$now = time();
+			$tmp_time = $time + ($now - $update);
+			
+			$stmt->bindParam(":session", $_POST['session']);
+			$stmt->bindParam(":name", $_POST['username']);
+			$stmt->execute();
+			echo $stmt->queryString;
+			echo "<br />\n";
+			echo $stmt->errorCode();
+			echo "\nPDO::errorInfo():\n";
+			print_r($stmt->errorInfo());
+			$isauth = true;
+	
+	
+		}catch(PDOException $e){
+			echo $e->getMessage();
+		}
+
+
+	
+	
+	
+		$data->set('command',json_encode(array('session'=>htmlentities($_POST['session']),'time'=>time(), 'command'=>$_POST['command'], 'username'=>$_POST['username'])));
+		
+	} else if ($_POST['command'] == 'toptimerreset') {
+	
+		try{
+			$sql  ="";
+			$sql .="UPDATE `" . $database_table_prefix . "user_active`";
+			$sql .="SET `status` = 'stop'";
+			$sql .=", `time` = '0' ";
+			$sql .=",`update` = UNIX_TIMESTAMP( ) ";
+			$sql .="WHERE `session` = :session ";
+			$sql .="   AND `status` = 'start'";
+	
+			if ($debug >= 1) {
+				echo $sql;
+				$stmt = $dbh->prepare($sql);
+				$status = "start";
+			}
+	
+			$stmt->bindParam(":session", $_POST['session']);
+			$stmt->execute();
+	
+		}catch(PDOException $e){
+			echo $e->getMessage();
+		}
+
+	
+	
 		$data->set('command',json_encode(array('session'=>htmlentities($_POST['session']),'time'=>time(), 'command'=>$_POST['command'], 'username'=>$_POST['username'])));
 		
 	}
