@@ -1,0 +1,154 @@
+{
+    "setting": {
+        "bgcolor": "#000000",
+        "oncolor": "#00ff00",
+        "offcolor": "#070707",
+        "autosync": "true",
+        "offset2": "-55356000"
+    },
+    "top": {
+        "name": "TOP",
+        "status": "run",
+        "update": "0",
+        "time": "0"
+    },
+    "users": [
+		{
+            "id": "556950",
+            "name": "Simone Brand",
+            "status": "stop",
+            "update": "1494284755",
+            "time": "0",
+            "wordrequest": "0"
+        },
+        {
+            "id": "556951",
+            "name": "Dr. Joachim Paul",
+            "status": "stop",
+            "update": "1494284755",
+            "time": "0",
+            "wordrequest": "0"
+        },
+        {
+            "id": "556952",
+            "name": "Marc Olejak",
+            "status": "stop",
+            "update": "1494284755",
+            "time": "0",
+            "wordrequest": "0"
+        },
+        {
+            "id": "556953",
+            "name": "Michele Marsching",
+            "status": "stop",
+            "update": "1494284755",
+            "time": "0",
+            "wordrequest": "0"
+        },
+        {
+            "id": "556954",
+            "name": "Lukas Lamla",
+            "status": "stop",
+            "update": "1494284755",
+            "time": "0",
+            "wordrequest": "0"
+        },
+        {
+            "id": "556955",
+            "name": "Nico Kern",
+            "status": "stop",
+            "update": "1494284755",
+            "time": "0",
+            "wordrequest": "0"
+        },
+        {
+            "id": "556911",
+            "name": "Frank Herrmann",
+            "status": "stop",
+            "update": "1494282350",
+            "time": "0",
+            "wordrequest": "0"
+        },
+        {
+            "id": "556957",
+            "name": "Stefan Fricke",
+            "status": "stop",
+            "update": "1494284755",
+            "time": "0",
+            "wordrequest": "0"
+        },
+        {
+            "id": "556913",
+            "name": "Daniel D\u00fcngel",
+            "status": "stop",
+            "update": "1494282350",
+            "time": "0",
+            "wordrequest": "0"
+        },
+        {
+            "id": "556959",
+            "name": "Hanns-J\u00f6rg Rohwedder",
+            "status": "stop",
+            "update": "1494284871",
+            "time": "60",
+            "wordrequest": "0"
+        },
+        {
+            "id": "556960",
+            "name": "Kai Schmalenbach",
+            "status": "stop",
+            "update": "1494284755",
+            "time": "0",
+            "wordrequest": "0"
+        },
+        {
+            "id": "556961",
+            "name": "Dirk Schatz",
+            "status": "start",
+            "update": "1494284977",
+            "time": "431",
+            "wordrequest": "0"
+        },
+        {
+            "id": "556962",
+            "name": "Oliver Bayer",
+            "status": "stop",
+            "update": "1494284755",
+            "time": "0",
+            "wordrequest": "0"
+        },
+        {
+            "id": "556918",
+            "name": "Birgit Rydlewski",
+            "status": "stop",
+            "update": "1494282350",
+            "time": "0",
+            "wordrequest": "0"
+        },
+        {
+            "id": "556964",
+            "name": "Monika Pieper",
+            "status": "stop",
+            "update": "1494284755",
+            "time": "0",
+            "wordrequest": "0"
+        },
+        {
+            "id": "556965",
+            "name": "Olaf Wegner",
+            "status": "stop",
+            "update": "1494284755",
+            "time": "0",
+            "wordrequest": "0"
+        },
+        {
+            "id": "556966",
+            "name": "Torsten Sommer",
+            "status": "stop",
+            "update": "1494284755",
+            "time": "0",
+            "wordrequest": "0"
+        }
+	
+	]
+}
